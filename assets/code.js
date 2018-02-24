@@ -3,7 +3,7 @@ $(document).ready(function () {
     var playerCard = $('.cardToMove');
     var start = false;
     $('#HealthSc');
-
+$('#fight').hide
     $('#toPickFrom .cardToMove').click(function () {
         console.log("i was clicked")
         if (start == false) {
