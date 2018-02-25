@@ -4,19 +4,40 @@ $(document).ready(function () {
     var start = false;
     $('#HealthSc');
     var wins = 0
-    var losses =0
+    var losses = 0
     $('#wins').text(wins);
     $('#lost').text(losses);
+   var sumHealthTroopers =  $('#TrooperHealthSc').text();
+    $('#fight').hide();
+    $("#win-image").hide()
+    $("#lost-image").hide();
+    
+    function win() {
+        wins++;
+        $('#wins').text(wins);
+        $("#win-image").show();
+        $("#toHide").hide();
 
-$('#fight').hide();
+        reload();
+    }
+    function lost() {
+        losses++;
+        $('#lost').text(losses);
+        $("#lost-image").show();
+        $("#toHide").hide();
+        reload();
+    }
+    function reload() {
+        setInterval('window.location.reload()', 4000);
+    }
+   
 
 
 
 
 
 
-
-    $('#toPickFrom .cardToMove').click(function (tosec) {
+    $('#toPickFrom .cardToMove').click(function () {
         console.log("i was clicked")
         if (start == false) {
             for (var i = 0; i < playerCard.length; i++) {
@@ -33,24 +54,10 @@ $('#fight').hide();
             }
         }
     });
-
-    //  var TrooperHealth = $('#Troopers .cardHealth')
-    //  var TrooperDMG =  $('#Troopers .cardDMG')
-    //  var PlayerHealth = $('#toPickFrom .cardHealth')
-    //  var PlayerDMG =  $('#toPickFrom .cardDMG')
-    //  var TeamHealth;
+    
     $('#Attack').click(function () {
         $('#fight').show();
         $('#Attack').hide();
-
-
-        // var TrooperHealth = $('#Troopers .cardHealth').text();
-        // var TrooperDMG = $('#Troopers .cardDMG').text();
-        // var PlayerHealth = $('#toPickFrom .cardHealth').text();
-        // var PlayerDMG = $('#toPickFrom .cardDMG').text();
-        // var TeamHealth;
-        // var team1 = [TrooperHealth,];
-
         //Trooper
 
         var sumHealthTroopers = 0;
@@ -77,48 +84,32 @@ $('#fight').hide();
         var Player2dmg = parseInt($('#toPickFrom .card-body').last().find('.cardDMG').text());
         sumDMGPlayer = Player1dmg + Player2dmg;
         $('#AttackSc').text(sumDMGPlayer);
-        //var team2
-        console.log("Total Troopers Health", sumHealthTroopers);
-        console.log("Total Player Health", sumHealthPlayer);
-        console.log("Total Troopers Health", sumDMGTroopers);
-        console.log("Total Player Health", sumDMGPlayer);
 
         $('#fight').click(function () {
-            console.log("i was clicked fight")
             //    var sumHealthTroopers = $('#HealthScLeft').text();
             sumHealthPlayer = sumHealthPlayer - sumDMGTroopers
             sumHealthTroopers = sumHealthTroopers - sumDMGPlayer
             $('#HealthScLeft').text(sumHealthPlayer);
-            $('#TrooperHealthScLeft').text(sumHealthTroopers); 
-            console.log(sumHealthTroopers)
+            $('#TrooperHealthScLeft').text(sumHealthTroopers);
 
-            if(sumHealthTroopers <= 0){
-                console.log("inside health if ",sumHealthTroopers )
+            if (sumHealthTroopers <= 0) {
+                console.log("inside health if ", sumHealthTroopers)
                 win();
-                reload();
+                
+            }
+            if (sumHealthPlayer <= 0) {
+                console.log("inside health if ", sumHealthPlayer)
+                lost();
+               
             }
 
         })
-        
+
 
 
     })
 
-    function win() {
-        wins++;
-        $('#wins').text(wins);
-    
-        reload();
-    }
-    function lost() {
-        losses++;
-        $('#lost').text(losses);
-        reload();
-    }
-    function reload() {
-        location.reload();
-     
-    }
+ 
 
 });
 
