@@ -8,7 +8,13 @@
 }
 
 
-#TrooperHealthScLeft #HealthScLeft {
+#TrooperHealthScLeft {
+    color: red
+
+}
+
+
+#HealthScLeft {
     color: red
 
 }
